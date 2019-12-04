@@ -1,110 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
+  <head>
+    <link rel="shortcut icon" href="https://www.bbraun-brand.com/etc/designs/clientlibs/bbraun/img/favicon.ico">
+    <title>Chatbot on GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<head>
-		<link rel="shortcut icon" href="https://www.bbraun-brand.com/etc/designs/clientlibs/bbraun/img/favicon.ico">
-		<title>ChatBot on GitHub</title>
-		<style>
-			html, body { height: 100% }
-			body {
-				margin: 0;
-				background-color: #f2f2f2;
-			}			
+	<!-- get current verion of webchat-->
+	<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
+    
+    <style>
+		html, body { height: 100% }
+		body {
+			margin: 0;
+			background-color: #f2f2f2;
+		}			
 			
-			#webchat {
-				height: 100%;
-				width: 100%;
-				z-index: 1;
-				font-color: black;
-			
-				
-			}
-			
+		#webchat {
+			height: 100%;
+			width: 100%;
+			z-index: 1;
+			font-color: black;
+		}
+					
+		/* Important, AdaptiveCardButtons*/
+		.ac-pushButton{
+			font-family: RotisSansSerif;
+			font-size: 100%;
+		}
 
+		a{
+			color: #00B482;
+		}
 			
-			/* Important, AdaptiveCardButtons*/
-			.ac-pushButton{
-				font-family: RotisSansSerif;
-				font-size: 100%;
-			}
-
-			a{
-				color: #00B482;
-			}
-			
-			
-			/* Maybe broken after update, not necessary */
-			.css-115fwte:hover,
-			.css-115fwte:focus{
-				cursor: pointer;
+		/* Maybe broken after update, not necessary change the cursor at the send button */
+		.css-115fwte:hover,
+		.css-115fwte:focus{
+			cursor: pointer;
 			}		
-			.ac-textBlock{
-				white-space: normal !important;
-			}				
+		.ac-textBlock{
+			white-space: normal !important;
+		}
 		
+    </style>
+  </head>
+  <body>
+    <div id="webchat" role="main"></div>
+	
+	
+    <script>
+		const secret = 'A7gfd1ntYMA.eZmaJ3YFb7aUyAQjUdB5LyMfN3yh1h_RfkBIE9ozf9g'
 
-});
-
-
-		</style>
-	</head>
-	<body style='font-family:RotisSansSerif'>
-		<div id="webchat" role="main"></div>
-     
-      <!-- 	Inmplement the current webchat version 
-			Thats the schema for a Webchat, our own Webchat gets implemented later 
-			
-			-->
-
-      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
-      <script>
-
-		// Implement our own Webchat, change "secret" to own secret to change the webchat
-         window.WebChat.renderWebChat(
-            {
-               directLine: window.WebChat.createDirectLine({
-                  secret: 'xgiEOJbRuaI.4ixSLdbqRsKKqAsi_y-0Wdzwk9vismfYl5Pgd9tfdcc'
-               }),
-               // disable timestamp
+		window.fetch('https://directline.botframework.com/v3/directline/tokens/generate', {method: 'POST',headers: {
+				'Authorization': 'Bearer ' + secret}
+			})
+			.then(function (res) {
+			return res.json();
+			})
+			.then(function (json) {
+			  const token = json.token;
+			  window.WebChat.renderWebChat({
+				directLine: window.WebChat.createDirectLine({
+				  token: token
+				}),
+				// disable timestamp
 				groupTimestamp: false,
 				
 				//set language
 				locale: 'en-US',
 				
+				// Passing 'styleOptions' when rendering Web Chat 
+				// Must be here because of IE11
 				styleOptions: {
-				// chatbot
-				bubbleBackground: '#711E82',
-				bubbleTextColor: 'white',
-				bubbleBorderColor: '#711E82',
-				bubbleBorderRadius: 15,
-				bubbleBorderStyle: 'solid',
-				bubbleBorderWidth: 1,
-				bubbleMaxWidth: 1000,
-
-				// User  
-				bubbleFromUserBackground: '#00B482',
-				bubbleFromUserTextColor: 'white',
-				bubbleFromUserBorderColor: '#00B482',
-				bubbleFromUserBorderRadius: 15,
-				bubbleFromUserBorderStyle: 'solid',
-				bubbleFromUserBorderWidth: 1,
-				
-
-				accent: 'black',
-
-				backgroundColor: 'white',
-				primaryFont: 'RotisSansSerif',
-			
-				hideUploadButton: true,
-            
-				// Avatar ausblenden            
-				avatarSize: 0 
-				}
-            },
-            // id of the div which contains the chat
-            document.getElementById('webchat')
-         );
          
-      </script>
-	</body>
+				 // chatbot
+					bubbleBackground: '#711E82',
+					bubbleTextColor: 'white',
+					bubbleBorderColor: '#711E82',
+					bubbleBorderRadius: 15,
+					bubbleBorderStyle: 'solid',
+					bubbleBorderWidth: 1,
+					bubbleMaxWidth: 1000,
+
+				 // User  
+					bubbleFromUserBackground: '#00B482',
+					bubbleFromUserTextColor: 'white',
+					bubbleFromUserBorderColor: '#00B482',
+					bubbleFromUserBorderRadius: 15,
+					bubbleFromUserBorderStyle: 'solid',
+					bubbleFromUserBorderWidth: 1,
+					
+
+					accent: 'black',
+
+					backgroundColor: 'white',
+					primaryFont: 'RotisSansSerif',
+				
+					hideUploadButton: true,
+					
+		// Avatar ausblenden            
+					avatarSize: 0   
+				}
+			  }, 
+			  document.getElementById('webchat'));
+			  document.querySelector('#webchat > *').focus();
+			});
+		        
+    </script>
+  </body>
 </html>
+
