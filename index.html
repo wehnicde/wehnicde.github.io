@@ -56,40 +56,8 @@
 			
 			-->
 
-      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
       <script>
-		
-		// styleOptions of the WebChat
-         const styleOptions = {
-         
-         // chatbot
-            bubbleBackground: '#711E82',
-            bubbleTextColor: 'white',
-            bubbleBorderColor: '#711E82',
-			bubbleBorderRadius: 15,
-			bubbleBorderStyle: 'solid',
-			bubbleBorderWidth: 1,
-			bubbleMaxWidth: 1000,
-
-         // User  
-            bubbleFromUserBackground: '#00B482',
-            bubbleFromUserTextColor: 'white',
-			bubbleFromUserBorderColor: '#00B482',
-			bubbleFromUserBorderRadius: 15,
-			bubbleFromUserBorderStyle: 'solid',
-			bubbleFromUserBorderWidth: 1,
-			
-
-			accent: 'black',
-
-            backgroundColor: 'white',
-            primaryFont: 'RotisSansSerif',
-        
-            hideUploadButton: true,
-            
-// Avatar ausblenden            
-            avatarSize: 0,   
-         };
 
 		// Implement our own Webchat, change "secret" to own secret to change the webchat
          window.WebChat.renderWebChat(
@@ -103,8 +71,35 @@
 				//set language
 				locale: 'en-US',
 				
-               // Passing 'styleOptions' when rendering Web Chat
-               styleOptions
+				styleOptions: {
+				// chatbot
+				bubbleBackground: '#711E82',
+				bubbleTextColor: 'white',
+				bubbleBorderColor: '#711E82',
+				bubbleBorderRadius: 15,
+				bubbleBorderStyle: 'solid',
+				bubbleBorderWidth: 1,
+				bubbleMaxWidth: 1000,
+
+				// User  
+				bubbleFromUserBackground: '#00B482',
+				bubbleFromUserTextColor: 'white',
+				bubbleFromUserBorderColor: '#00B482',
+				bubbleFromUserBorderRadius: 15,
+				bubbleFromUserBorderStyle: 'solid',
+				bubbleFromUserBorderWidth: 1,
+				
+
+				accent: 'black',
+
+				backgroundColor: 'white',
+				primaryFont: 'RotisSansSerif',
+			
+				hideUploadButton: true,
+            
+				// Avatar ausblenden            
+				avatarSize: 0 
+				}
             },
             // id of the div which contains the chat
             document.getElementById('webchat')
