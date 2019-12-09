@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link rel="shortcut icon" href="https://www.bbraun-brand.com/etc/designs/clientlibs/bbraun/img/favicon.ico">
-    <title>Chatbot on GitHub</title>
+    <title>Chatbot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- get current verion of webchat-->
@@ -27,6 +26,7 @@
 			font-family: RotisSansSerif;
 			font-size: 100%;
 		}
+
 		a{
 			color: #00B482;
 		}
@@ -47,16 +47,19 @@
 	
 	
     <script>
-		const secret = 'A7gfd1ntYMA.eZmaJ3YFb7aUyAQjUdB5LyMfN3yh1h_RfkBIE9ozf9g'
-		window.fetch('https://directline.botframework.com/v3/directline/tokens/generate', {method: 'POST',headers: {
-				'Authorization': 'Bearer ' + secret}
-			})
-			.then(function (res) {
-			return res.json();
-			})
-			.then(function (json) {
-			  const token = json.token;
-			  window.WebChat.renderWebChat({
+	
+	window
+        .fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
+		{ 
+			method: 'POST'
+		})
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(json) {
+          const token = json.token;
+		  
+		window.WebChat.renderWebChat({
 				directLine: window.WebChat.createDirectLine({
 				  token: token
 				}),
@@ -78,6 +81,7 @@
 					bubbleBorderStyle: 'solid',
 					bubbleBorderWidth: 1,
 					bubbleMaxWidth: 1000,
+
 				 // User  
 					bubbleFromUserBackground: '#00B482',
 					bubbleFromUserTextColor: 'white',
@@ -86,7 +90,9 @@
 					bubbleFromUserBorderStyle: 'solid',
 					bubbleFromUserBorderWidth: 1,
 					
+
 					accent: 'black',
+
 					backgroundColor: 'white',
 					primaryFont: 'RotisSansSerif',
 				
@@ -103,3 +109,4 @@
     </script>
   </body>
 </html>
+
