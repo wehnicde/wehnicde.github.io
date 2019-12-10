@@ -1,79 +1,246 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <title>Chatbot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="shortcut icon" href="https://www.bbraun-brand.com/etc/designs/clientlibs/bbraun/img/favicon.ico">
+<html>
 
-	<!-- get current verion of webchat-->
-	<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
-    
-    <style>
-		html, body { height: 100% }
-		body {
-			margin: 0;
-			background-color: #f2f2f2;
-		}			
-			
-		#webchat {
-			height: 100%;
-			width: 100%;
-			z-index: 1;
-			font-color: black;
-		}
-					
-		/* Important, AdaptiveCardButtons*/
-		.ac-pushButton{
-			font-family: RotisSansSerif;
-			font-size: 100%;
-		}
-
-		a{
-			color: #00B482;
-		}
-			
-		/* Maybe broken after update, not necessary change the cursor at the send button */
-		.css-115fwte:hover,
-		.css-115fwte:focus{
-			cursor: pointer;
-			}		
-		.ac-textBlock{
-			white-space: normal !important;
-		}
+	<head>
+		<link rel="shortcut icon" href="https://www.bbraun-brand.com/etc/designs/clientlibs/bbraun/img/favicon.ico">
+		<title>ChatBot</title>
+		<style>
+			html, body { height: 100% }
+			body {
+				margin: 0;
+				background-color: #f2f2f2;
+			}
 		
-    </style>
-  </head>
-  <body>
-    <div id="webchat" role="main"></div>
+			#fenster{
+				
+				height: 100%;
+				width: 100%;
+								
+			}
+
+			#chatFenster{
+			
+				display: none;
+				background-color: #CCCCCC;
+				position: absolute;
+				top: 30%;
+				right: 0px;
+				bottom: 2px;
+				height: 70%;
+				width: 70%;
+				max-height: 1000px;
+				max-width: 500px;
+				min-height: 300px;
+				min-width: 100px;
+				
+			}
+			
+			
+			
+			#webchat {
+				height: calc(100% - 35px);
+				width: 100%;
+				margin-top: 35px;
+				z-index: 1;
+				font-color: black;
+			
+				
+			}
+			
+	/* Der Close Button */		
+			#close{
+		
+				float: right;						
+				margin-right: 5px;
+				margin-top: 5px;
+			}
+			#close:hover,
+			#close:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			
+	/* Schriftzug "ComplianceBot" */		
+			#textLeiste{
+				float: left;
+				margin-left: 5px;
+				margin-top: 5px;
+				
+			}
+			#textLeiste:hover,
+			#textLeiste:focus{
+				cursor: default;
+			}
+			
+			#msteams{
+				float: right;
+				margin-right: 10px;
+				margin-top: 5px;	
+			}
+			#msteams:hover,
+			#msteams:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			
+	/* Test */
+			#vollbild{
+				float: right;
+				margin-right: 10px;
+				margin-top: 5px;
+			}
+			#vollbild:hover,
+			#vollbild:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			#kleinesBild{
+				float: right;
+				margin-right: 10px;
+				margin-top: 5px;
+				display: none;
+			}
+			#kleinesBild:hover,
+			#kleinesBild:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			
+			
+	/* Button */
+			#myBtn{
+				height: 70px;
+				width: 70px;
+				
+				font-weight: bold;
+				background-color: rgba(110,110,110,0.7);
+				color: white;
+				border: none;
+				border-radius: 100%;
+			}
+			#myBtn:hover,
+			#myBtn:focus{
+				background-color: #595959;
+				cursor: pointer;
+			}
+			
+			
+			
+			/* Important, AdaptiveCardButtons*/
+			.ac-pushButton{
+				font-family: RotisSansSerif;
+				font-size: 100%;
+			}
+
+			a{
+				color: #00B482;
+			}
+			
+			/* Maybe broken after update, not necessary */
+			.css-115fwte:hover,
+			.css-115fwte:focus{
+				cursor: pointer;
+			}		
+			.ac-textBlock{
+				white-space: normal !important;
+			}				
+		
+
+});
+
+
+		</style>
+	</head>
+	<body style='font-family:RotisSansSerif'>
+		
+	  <button id="myBtn" style="position: absolute; right: 5%; bottom: 5%;">ComBot</button>
 	
-	
-    <script>
-	
-	window
-        .fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
-		{ 
-			method: 'POST'
-		})
-        .then(function(res) {
-          return res.json();
-        })
-        .then(function(json) {
-          const token = json.token;
-		  
-		window.WebChat.renderWebChat({
+
+	  <div id=fenster role="main">
+
+	  
+		<div id=chatFenster >
+			<span id="textLeiste">ComplianceBot</span>
+			<span id="close" ><img src="https://img.icons8.com/windows/32/000000/minimize-window.png" height="25px"></span>
+			<span id="vollbild"><img src="https://img.icons8.com/android/24/000000/expand.png" height="25px"></span>
+			<span id="kleinesBild"><img src="https://img.icons8.com/android/24/000000/collapse.png" height="25px"></span>
+			<span id="msteams"><a href='https://teams.microsoft.com/l/chat/0/0?users=28:10bab881-076b-435a-8bf7-6ef53590c287'><img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" height="25px"></a></span>
+			<div id="webchat" role="main"></div>
+		</div>
+		
+		
+	  </div>
+     
+      <!-- 	Inmplement the current webchat version 
+			Thats the schema for a Webchat, our own Webchat gets implemented later 
+			
+			-->
+
+      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+      <script>
+		var btn = document.getElementById("myBtn");
+		var close = document.getElementById("close");
+		var vollbild = document.getElementById("vollbild");
+		var kleinesBild = document.getElementById("kleinesBild");
+		
+		btn.onclick = function(){
+			chatFenster.style.display = "block";
+			btn.style.display = "none";
+			
+		
+		}
+		close.onclick = function(){
+			chatFenster.style.display = "none";			
+			btn.style.display ="block";
+		}
+		vollbild.onclick = function(){
+		
+			chatFenster.style.maxHeight = '100%';
+			chatFenster.style.maxWidth = '100%';
+			chatFenster.style.height='100%';
+			chatFenster.style.width='100%';
+			chatFenster.style.top='0px';
+			
+			vollbild.style.display = "none";
+			kleinesBild.style.display = "block";
+		}
+		kleinesBild.onclick = function(){
+		
+			chatFenster.style.maxHeight = '1000px';
+			chatFenster.style.maxWidth = '500px';
+			chatFenster.style.height='70%';
+			chatFenster.style.width='70%';
+			chatFenster.style.top='30%';
+			
+			kleinesBild.style.display = "none";	
+			vollbild.style.display = "block";
+					
+		}
+		window
+			.fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
+			{ 
+				method: 'POST'
+			})
+			.then(function(res) {
+			  return res.json();
+			})
+			.then(function(json) {
+			  const token = json.token;
+			  
+			window.WebChat.renderWebChat({
 				directLine: window.WebChat.createDirectLine({
-				  token: token
+					token: token
 				}),
 				// disable timestamp
 				groupTimestamp: false,
-				
+					
 				//set language
 				locale: 'en-US',
-				
+					
 				// Passing 'styleOptions' when rendering Web Chat 
 				// Must be here because of IE11
 				styleOptions: {
-         
+			 
 				 // chatbot
 					bubbleBackground: '#711E82',
 					bubbleTextColor: 'white',
@@ -83,31 +250,28 @@
 					bubbleBorderWidth: 1,
 					bubbleMaxWidth: 1000,
 
-				 // User  
+					 // User  
 					bubbleFromUserBackground: '#00B482',
 					bubbleFromUserTextColor: 'white',
 					bubbleFromUserBorderColor: '#00B482',
 					bubbleFromUserBorderRadius: 15,
 					bubbleFromUserBorderStyle: 'solid',
 					bubbleFromUserBorderWidth: 1,
-					
 
 					accent: 'black',
 
 					backgroundColor: 'white',
 					primaryFont: 'RotisSansSerif',
-				
-					hideUploadButton: true,
 					
-		// Avatar ausblenden            
+					hideUploadButton: true,
+						
+					// Avatar ausblenden            
 					avatarSize: 0   
 				}
-			  }, 
-			  document.getElementById('webchat'));
-			  document.querySelector('#webchat > *').focus();
+			}, 
+				document.getElementById('webchat'));
 			});
-		        
-    </script>
-  </body>
+         
+      </script>
+	</body>
 </html>
-
