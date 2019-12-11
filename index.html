@@ -189,8 +189,19 @@
       <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
 		<!-- Make chat draggable -->
 	 <script> 
+
+	 /*
+		myBtn.addEventListener('ontouchmove', function(event){
+			var touch = event.targetTouches[0];
+
+			myBtn.style.left = touch.pageX-25 +'px';
+			myBtn.style.top = touch.pageY-25 +'px';
+			event.preventDefault();
+		}, false);
+		*/
+
 		dragElement(document.getElementById("chatFenster"));
-		dragElement(document.getElementById("myBtn"));
+//		dragElement(document.getElementById("myBtn"));
 		
 		function dragElement(elmnt){
 			var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -198,11 +209,11 @@
 			if (document.getElementById(elmnt.id + "Header")) {
 				// if present, the header is where you move the DIV from:
 				document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
-				document.getElementById(elmnt.id + "Header").ontouchstart = dragMouseDown;
+				
 			}else{
 				// otherwise, move the DIV from anywhere inside the DIV:
 				elmnt.onmousedown = dragMouseDown;
-				elmnt.ontouchstart = dragMouseDown;
+				
 			}
 			
 		
@@ -212,11 +223,11 @@
 				
 				pos3 = e.clientX;
 				pos4 = e.clientY;
+
 				document.onmouseup = closeDragElement;
 				document.onmousemove = elementDrag;
 
-				document.ontouchend = closeDragElement;
-				document.ontouchmove = elementDrag;
+				
 			}
 			
 			function elementDrag(e){
@@ -249,6 +260,7 @@
 				document.onmousemove = null;
 			}
 		}
+
 		</script>
 		<script>
 		var myBtn = document.getElementById("myBtn");
