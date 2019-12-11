@@ -22,8 +22,7 @@
 			
 				display: none;
 				background-color: #CCCCCC;
-				position: absolute;
-				top: 30%;
+				position: fixed;
 				right: 0px;
 				bottom: 2px;
 				
@@ -36,18 +35,13 @@
 				
 			}
 			#chatFensterHeader{
-				height: 40px;
+				height: 35px;
 			}
 			
 			
 			#webchat {
-				height: calc(100% - 40px);
-				width: 100%;
-				
-				z-index: 1;
-				font-color: black;
-			
-				
+				height: calc(100% - 35px);
+				width: 100%;		
 			}
 			
 	/* Der Close Button */		
@@ -55,7 +49,7 @@
 		
 				float: right;						
 				margin-right: 5px;
-				
+				height: 35px;	
 			}
 			#close:hover,
 			#close:focus{
@@ -67,7 +61,7 @@
 			#textLeiste{
 				float: left;
 				margin-left: 10px;
-				margin-top: 9px;
+				margin-top: 6px;
 				font-weight: bold;
 				
 				
@@ -80,6 +74,7 @@
 			#msteams{
 				float: right;
 				margin-right: 7px;	
+				height: 35px;
 			}
 			#msteams:hover,
 			#msteams:focus{
@@ -91,6 +86,7 @@
 			#vollbild{
 				float: right;
 				margin-right: 7px;
+				height: 35px;
 			}
 			#vollbild:hover,
 			#vollbild:focus{
@@ -101,6 +97,7 @@
 				float: right;
 				margin-right: 7px;
 				display: none;
+				height: 35px;
 			}
 			#kleinesBild:hover,
 			#kleinesBild:focus{
@@ -110,7 +107,8 @@
 			#hilfe{
 				float: left;
 				margin-left: 7px;
-				margin-top: 7px;
+				margin-top: 5px;
+				margin-bottom: 5px;
 				height: 25px;
 			}
 			#hilfe:hover,
@@ -124,7 +122,7 @@
 			#myBtn{
 				height: 70px;
 				width: 70px;
-				position: absolute;
+				position: fixed;
 				right: 5%;
 				bottom: 5%;
 			}
@@ -137,9 +135,9 @@
 			/* Changing link color */
 			
 			a{
-				color: #00B482;
+				color: #00b482;
 			}
-			
+		
 			/* Maybe broken after update, not necessary */
 			.ac-pushButton{
 				font-family: RotisSansSerif;
@@ -156,17 +154,12 @@
 			}		
 			.ac-textBlock{
 				white-space: normal !important;
-			}	
-
-		
-
-});
-
-
+			}
 		</style>
+
 	</head>
 	<body style='font-family:RotisSansSerif'>
-			
+
 		<input id="myBtn" type="image" src="\icons\ButtonChatBotTest.png" />
 
 		<div id=fenster role="main">
@@ -197,12 +190,20 @@
 		<!-- Make chat draggable -->
 	 <script> 
 		dragElement(document.getElementById("chatFenster"));
+		dragElement(document.getElementById("myBtn"));
 		
 		function dragElement(elmnt){
 			var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 			
-			document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
-		
+			if (document.getElementById(elmnt.id + "Header")) {
+				// if present, the header is where you move the DIV from:
+				document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+				document.getElementById(elmnt.id + "Header").touchstart = dragMouseDown;
+			}else{
+				// otherwise, move the DIV from anywhere inside the DIV:
+				elmnt.onmousedown = dragMouseDown;
+				elmnt.touchstart = dragMouseDown;
+			}
 			
 		
 			function dragMouseDown(e){
@@ -213,18 +214,34 @@
 				pos4 = e.clientY;
 				document.onmouseup = closeDragElement;
 				document.onmousemove = elementDrag;
+
+				document.touchend = closeDragElement;
+				document.touchmove = elementDrag;
 			}
 			
 			function elementDrag(e){
 				e = e || window.event;
 				e.preventDefault();
-				pos1 = pos3 - e.clientX;
-				pos2 = pos4 - e.clientY;
+				// left
+					pos1 = pos3 - e.clientX;
+				// top
+					pos2 = pos4 - e.clientY;
+
+				
 				pos3 = e.clientX;
 				pos4 = e.clientY;
 				
-				elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-				elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+				if(elmnt.offsetTop >= 0){
+					elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+				}else{
+					elmnt.style.top = "0px";
+				}
+
+				if(elmnt.offsetLeft >= -1){
+					elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+				}else{
+					elmnt.style.left = "0px";
+				}
 			}
 			
 			function closeDragElement(){
@@ -232,25 +249,22 @@
 				document.onmousemove = null;
 			}
 		}
-	  </script>
-      <script>
-		var btn = document.getElementById("myBtn");
+		</script>
+		<script>
+		var myBtn = document.getElementById("myBtn");
 		var close = document.getElementById("close");
 		var vollbild = document.getElementById("vollbild");
 		var kleinesBild = document.getElementById("kleinesBild");
 		var help = document.getElementById("hilfe");
 		
 		var styleTop = 0, styleLeft = 0;
-		
-		btn.onclick = function(){
+		myBtn.onclick = function(){
 			chatFenster.style.display = "block";
-			btn.style.display = "none";
-			
-		
+			myBtn.style.display = "none";	
 		}
 		close.onclick = function(){
 			chatFenster.style.display = "none";			
-			btn.style.display ="block";
+			myBtn.style.display ="block";
 		}
 		vollbild.onclick = function(){
 			
