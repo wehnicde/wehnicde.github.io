@@ -35,13 +35,15 @@
 				min-width: 100px;
 				
 			}
-			
+			#chatFensterHeader{
+				height: 40px;
+			}
 			
 			
 			#webchat {
 				height: calc(100% - 40px);
 				width: 100%;
-				margin-top: 35px;
+				
 				z-index: 1;
 				font-color: black;
 			
@@ -105,6 +107,17 @@
 				cursor: pointer;
 				background-color: #999999;
 			}
+			#hilfe{
+				float: left;
+				margin-left: 7px;
+				margin-top: 7px;
+				height: 25px;
+			}
+			#hilfe:hover,
+			#hilfe:focus{
+				cursor:pointer;
+				
+			}
 			
 			
 	/* Button */
@@ -154,19 +167,22 @@
 	</head>
 	<body style='font-family:RotisSansSerif'>
 			
-		<input id="myBtn" type="image" src="\icons\ButtonChatBotTest.png" />
+		<input id="myBtn" type="image" src="C:\Users\WEHNIC01\OneDrive - B. Braun\ChatBot\ButtonChatBotTest.png" />
 
 		<div id=fenster role="main">
 
 	  
-			<div id=chatFenster >
-			
-				<span id="textLeiste">ComplianceBot</span>
-				<span id="close" ><img src="https://img.icons8.com/windows/32/000000/minimize-window.png" title="Minimize" height="25px" style="margin: 5px 0px"></span>
-				<span id="vollbild"><img src="https://img.icons8.com/android/24/000000/expand.png" title="Maximize" height="19px" style="margin: 8px 3px"></span>
-				<span id="kleinesBild"><img src="https://img.icons8.com/android/24/000000/collapse.png" title="Restore Down" height="19px" style="margin: 8px 3px"></span>
-				<span id="msteams"><a href='https://teams.microsoft.com/l/chat/0/0?users=28:10bab881-076b-435a-8bf7-6ef53590c287'>
-					<img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" title="Add to Teams" height="25px" style="margin: 5px 0px"></a></span>	
+			<div id="chatFenster" >
+				<div id="chatFensterHeader">
+					<input id="hilfe" type="image" src="https://img.icons8.com/ios/100/000000/help.png" />
+					<span id="textLeiste">ComplianceBot</span>
+					<span id="close" ><img src="https://img.icons8.com/windows/32/000000/minimize-window.png" title="Minimize" height="25px" style="margin: 5px 0px"></span>
+					<span id="vollbild"><img src="https://img.icons8.com/android/24/000000/expand.png" title="Maximize" height="19px" style="margin: 8px 3px"></span>
+					<span id="kleinesBild"><img src="https://img.icons8.com/android/24/000000/collapse.png" title="Restore Down" height="19px" style="margin: 8px 3px"></span>
+					<span id="msteams"><a href='https://teams.microsoft.com/l/chat/0/0?users=28:10bab881-076b-435a-8bf7-6ef53590c287'>
+						<img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" title="Add to Teams" height="25px" style="margin: 5px 0px"></a></span>	
+				</div>
+				
 				<div id="webchat" role="main"></div>
 		</div>
 		
@@ -177,13 +193,54 @@
 			Thats the schema for a Webchat, our own Webchat gets implemented later 
 			
 			-->
-
       <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
+		<!-- Make chat draggable -->
+	 <script> 
+		dragElement(document.getElementById("chatFenster"));
+		
+		function dragElement(elmnt){
+			var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+			
+			document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+		
+			
+		
+			function dragMouseDown(e){
+				e = e || window.event;
+				e.preventDefault();
+				
+				pos3 = e.clientX;
+				pos4 = e.clientY;
+				document.onmouseup = closeDragElement;
+				document.onmousemove = elementDrag;
+			}
+			
+			function elementDrag(e){
+				e = e || window.event;
+				e.preventDefault();
+				pos1 = pos3 - e.clientX;
+				pos2 = pos4 - e.clientY;
+				pos3 = e.clientX;
+				pos4 = e.clientY;
+				
+				elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+				elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+			}
+			
+			function closeDragElement(){
+				document.onmouseup = null;
+				document.onmousemove = null;
+			}
+		}
+	  </script>
       <script>
 		var btn = document.getElementById("myBtn");
 		var close = document.getElementById("close");
 		var vollbild = document.getElementById("vollbild");
 		var kleinesBild = document.getElementById("kleinesBild");
+		var help = document.getElementById("hilfe");
+		
+		var styleTop = 0, styleLeft = 0;
 		
 		btn.onclick = function(){
 			chatFenster.style.display = "block";
@@ -196,12 +253,16 @@
 			btn.style.display ="block";
 		}
 		vollbild.onclick = function(){
-		
+			
+			styleTop = chatFenster.style.top;
+			styleLeft = chatFenster.style.left;
+			
 			chatFenster.style.maxHeight = '100%';
 			chatFenster.style.maxWidth = '100%';
 			chatFenster.style.height='100%';
 			chatFenster.style.width='100%';
 			chatFenster.style.top='0px';
+			chatFenster.style.left='0px';
 			
 			vollbild.style.display = "none";
 			kleinesBild.style.display = "block";
@@ -212,12 +273,29 @@
 			chatFenster.style.maxWidth = '500px';
 			chatFenster.style.height='70%';
 			chatFenster.style.width='70%';
-			chatFenster.style.top='30%';
+			chatFenster.style.top = styleTop;
+			chatFenster.style.left = styleLeft;
+			
 			
 			kleinesBild.style.display = "none";	
 			vollbild.style.display = "block";
 					
 		}
+		help.onclick = function(){
+			if(window.confirm("Press OK to send a Email to a Compliance Officer. Press Cancel to cancel.")){
+			
+				let mailAdress = "niclas.weh_ext@aesculap.de";
+				let subject = "ComplianceBot Human Support needed || Priority: HIGH/LOW";
+				let body = "Please enter your question and change the priority in the subject to your needs..";
+			
+				window.location.href = "mailto:" + mailAdress + "?subject=" + subject + "&body=" + body;
+				
+			}else{
+				
+			}
+		}
+		
+		// Webchat
 		window
 			.fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
 			{ 
