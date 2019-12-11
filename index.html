@@ -34,76 +34,20 @@
 				min-width: 100px;
 				
 			}
-			#chatFensterHeader{
-				height: 35px;
-			}
+			
 			
 			
 			#webchat {
-				height: calc(100% - 35px);
-				width: 100%;		
+				height: calc(100% - 39px);
+				width: calc(100%-2px);
+				padding: 2px;		
 			}
 			
-	/* Der Close Button */		
-			#close{
-		
-				float: right;						
-				margin-right: 5px;
-				height: 35px;	
-			}
-			#close:hover,
-			#close:focus{
-				cursor: pointer;
-				background-color: #999999;
-			}
-			
-	/* Schriftzug "ComplianceBot" */		
-			#textLeiste{
-				float: left;
-				margin-left: 10px;
-				margin-top: 6px;
-				font-weight: bold;
-				
-				
-			}
-			#textLeiste:hover,
-			#textLeiste:focus{
-				cursor: default;
-			}
-			
-			#msteams{
-				float: right;
-				margin-right: 7px;	
+/* ####################### TOOLBAR ########################*/
+			#chatFensterHeader{
 				height: 35px;
 			}
-			#msteams:hover,
-			#msteams:focus{
-				cursor: pointer;
-				background-color: #999999;
-			}
-			
-	/* Test */
-			#vollbild{
-				float: right;
-				margin-right: 7px;
-				height: 35px;
-			}
-			#vollbild:hover,
-			#vollbild:focus{
-				cursor: pointer;
-				background-color: #999999;
-			}
-			#kleinesBild{
-				float: right;
-				margin-right: 7px;
-				display: none;
-				height: 35px;
-			}
-			#kleinesBild:hover,
-			#kleinesBild:focus{
-				cursor: pointer;
-				background-color: #999999;
-			}
+			/* Hilfe Button */
 			#hilfe{
 				float: left;
 				margin-left: 7px;
@@ -116,9 +60,74 @@
 				cursor:pointer;
 				
 			}
+
+			/* Close Button */		
+			#close{
+		
+				float: right;						
+				margin-right: 5px;
+				height: 35px;	
+			}
+			#close:hover,
+			#close:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			
+			/* Schriftzug "ComplianceBot" */		
+			#textLeiste{
+				float: left;
+				margin-left: 10px;
+				margin-top: 6px;
+				font-weight: bold;
+				
+				
+			}
+			#textLeiste:hover,
+			#textLeiste:focus{
+				cursor: default;
+			}
+
+			/* MS Teams Button*/
+			#msteams{
+				float: right;
+				margin-right: 7px;	
+				height: 35px;
+			}
+			#msteams:hover,
+			#msteams:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+			
+			/* Vollbild Button*/
+			#vollbild{
+				float: right;
+				margin-right: 7px;
+				height: 35px;
+			}
+			#vollbild:hover,
+			#vollbild:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
+
+			/* Kleines Bild Button*/
+			#kleinesBild{
+				float: right;
+				margin-right: 7px;
+				display: none;
+				height: 35px;
+			}
+			#kleinesBild:hover,
+			#kleinesBild:focus{
+				cursor: pointer;
+				background-color: #999999;
+			}
 			
 			
-	/* Button */
+			
+	/*  ####################### Chatbot öffnen ######################## */
 			#myBtn{
 				height: 70px;
 				width: 70px;
@@ -132,6 +141,7 @@
 				cursor: pointer;
 			}
 			
+	/*  ####################### ZEUGS ########################*/		
 			/* Changing link color */
 			
 			a{
@@ -184,21 +194,11 @@
      
       <!-- 	Inmplement the current webchat version 
 			Thats the schema for a Webchat, our own Webchat gets implemented later 
-			
+	
 			-->
       <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
 		<!-- Make chat draggable -->
 	 <script> 
-
-	 /*
-		myBtn.addEventListener('ontouchmove', function(event){
-			var touch = event.targetTouches[0];
-
-			myBtn.style.left = touch.pageX-25 +'px';
-			myBtn.style.top = touch.pageY-25 +'px';
-			event.preventDefault();
-		}, false);
-		*/
 
 		dragElement(document.getElementById("chatFenster"));
 //		dragElement(document.getElementById("myBtn"));
@@ -225,20 +225,17 @@
 				pos4 = e.clientY;
 
 				document.onmouseup = closeDragElement;
-				document.onmousemove = elementDrag;
-
-				
+				document.onmousemove = elementDrag;		
 			}
 			
 			function elementDrag(e){
 				e = e || window.event;
 				e.preventDefault();
 				// left
-					pos1 = pos3 - e.clientX;
+				pos1 = pos3 - e.clientX;
 				// top
-					pos2 = pos4 - e.clientY;
+				pos2 = pos4 - e.clientY;
 
-				
 				pos3 = e.clientX;
 				pos4 = e.clientY;
 				
@@ -260,8 +257,8 @@
 				document.onmousemove = null;
 			}
 		}
-
 		</script>
+
 		<script>
 		var myBtn = document.getElementById("myBtn");
 		var close = document.getElementById("close");
@@ -320,7 +317,9 @@
 				
 			}
 		}
-		
+		</script>
+
+		<script>
 		// Webchat
 		window
 			.fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
