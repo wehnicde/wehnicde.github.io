@@ -160,7 +160,7 @@
 	</head>
 	<body style='font-family:RotisSansSerif'>
 
-		<input id="myBtn" type="image" src="\icons\ButtonChatBotTest.png" />
+		<input id="myBtn" type="image" src=".\icons\ButtonChatBotTest.png" />
 
 		<div id=fenster role="main">
 
@@ -198,11 +198,11 @@
 			if (document.getElementById(elmnt.id + "Header")) {
 				// if present, the header is where you move the DIV from:
 				document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
-				document.getElementById(elmnt.id + "Header").touchstart = dragMouseDown;
+				document.getElementById(elmnt.id + "Header").ontouchstart = dragMouseDown;
 			}else{
 				// otherwise, move the DIV from anywhere inside the DIV:
 				elmnt.onmousedown = dragMouseDown;
-				elmnt.touchstart = dragMouseDown;
+				elmnt.ontouchstart = dragMouseDown;
 			}
 			
 		
@@ -215,8 +215,8 @@
 				document.onmouseup = closeDragElement;
 				document.onmousemove = elementDrag;
 
-				document.touchend = closeDragElement;
-				document.touchmove = elementDrag;
+				document.ontouchend = closeDragElement;
+				document.ontouchmove = elementDrag;
 			}
 			
 			function elementDrag(e){
