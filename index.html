@@ -141,8 +141,7 @@
 				cursor: pointer;
 			}
 			
-	/*  ####################### ZEUGS ########################*/	
-
+	/*  ####################### ZEUGS ########################*/		
 			/* Changing link color */
 			
 			a{
@@ -166,7 +165,6 @@
 			.ac-textBlock{
 				white-space: normal !important;
 			}
-
 		</style>
 
 	</head>
@@ -184,7 +182,8 @@
 					<span id="close" ><img src="https://img.icons8.com/windows/32/000000/minimize-window.png" title="Minimize" height="25px" style="margin: 5px 0px"></span>
 					<span id="vollbild"><img src="https://img.icons8.com/android/24/000000/expand.png" title="Maximize" height="19px" style="margin: 8px 3px"></span>
 					<span id="kleinesBild"><img src="https://img.icons8.com/android/24/000000/collapse.png" title="Restore Down" height="19px" style="margin: 8px 3px"></span>
-					<span id="msteams"><img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" title="Add to Teams" height="25px" style="margin: 5px 0px"></span> 
+					<span id="msteams"><a href="#" onclick='window.open("https://teams.microsoft.com/l/chat/0/0?users=28:10bab881-076b-435a-8bf7-6ef53590c287");return false;'>
+						<img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" title="Add to Teams" height="25px" style="margin: 5px 0px"></a></span>	
 				</div>
 				
 				<div id="webchat" role="main"></div>
@@ -195,18 +194,11 @@
      
       <!-- 	Inmplement the current webchat version 
 			Thats the schema for a Webchat, our own Webchat gets implemented later 
-
-
-NEW!!!!!!!
+	
 			-->
-		<script 
-			crossorigin="anonymous"
-			src="https://cdn.botframework.com/botframework-webchat/4.7.1/webchat-es5.js"
-		></script>
-
-		
+      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
 		<!-- Make chat draggable -->
-		<script> 
+	 <script> 
 
 		dragElement(document.getElementById("chatFenster"));
 //		dragElement(document.getElementById("myBtn"));
@@ -273,25 +265,11 @@ NEW!!!!!!!
 		var vollbild = document.getElementById("vollbild");
 		var kleinesBild = document.getElementById("kleinesBild");
 		var help = document.getElementById("hilfe");
-		var msteams = document.getElementById("msteams");
 		
 		var styleTop = 0, styleLeft = 0;
-
-		var firstTime = true;
-
 		myBtn.onclick = function(){
-			if(firstTime == true){
-				if(confirm("By using this bot you agree that personal data might be stored.")){
-					chatFenster.style.display = "block";
-					myBtn.style.display = "none";
-					firstTime = false;	
-				}
-			}else{
-				chatFenster.style.display = "block";
-				myBtn.style.display = "none";			
-			}
-			
-			
+			chatFenster.style.display = "block";
+			myBtn.style.display = "none";	
 		}
 		close.onclick = function(){
 			chatFenster.style.display = "none";			
@@ -339,30 +317,25 @@ NEW!!!!!!!
 				
 			}
 		}
-		msteams.onclick = function(){
-			if(window.confirm("Do you want to open this Chatbot in MicrosoftTeams?")){
-				window.location.href = "https://teams.microsoft.com/l/chat/0/0?users=28:10bab881-076b-435a-8bf7-6ef53590c287";
-			
-			}else{
-			
-			}
-		}
 		</script>
 
 		<script>
-			webSpeechPonyfillFactory = window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
-			//	credentials: {
-						region: 'westeurope',
-						subscriptionKey: '7fc4b1c310c84ada968e860e7879e316'
-			//		}
+		// Webchat
+		window
+			.fetch('https://compliancebotbbraun-bot.azurewebsites.net/token-generate', 
+			{ 
+				method: 'POST'
 			})
+			.then(function(res) {
+			  return res.json();
+			})
+			.then(function(json) {
+			  const token = json.token;
+			  
 			window.WebChat.renderWebChat({
 				directLine: window.WebChat.createDirectLine({
-				//	token: token
-					secret: 'A7gfd1ntYMA.eZmaJ3YFb7aUyAQjUdB5LyMfN3yh1h_RfkBIE9ozf9g',
-					
+					token: token
 				}),
-				webSpeechPonyfillFactory: webSpeechPonyfillFactory,
 				// disable timestamp
 				groupTimestamp: false,
 					
@@ -402,7 +375,7 @@ NEW!!!!!!!
 				}
 			}, 
 				document.getElementById('webchat'));
-			
+			});
          
       </script>
 	</body>
