@@ -331,11 +331,17 @@
 			})
 			.then(function(json) {
 			  const token = json.token;
-			  
+			
+			webSpeechPonyfillFactory = window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
+					region: 'westeurope',
+					subscriptionKey: '7fc4b1c310c84ada968e860e7879e316'
+			
+			})  
 			window.WebChat.renderWebChat({
 				directLine: window.WebChat.createDirectLine({
 					token: token
 				}),
+				webSpeechPonyfillFactory,
 				// disable timestamp
 				groupTimestamp: false,
 					
