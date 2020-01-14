@@ -18,18 +18,18 @@ window.WebChat.renderWebChat({
         styleOptions: {
 
             // chatbot
-            bubbleBackground: '#711E82',
+            bubbleBackground: '#00B482',
             bubbleTextColor: 'white',
-            bubbleBorderColor: '#711E82',
+            bubbleBorderColor: '#00B482',
             bubbleBorderRadius: 15,
             bubbleBorderStyle: 'solid',
             bubbleBorderWidth: 1,
             bubbleMaxWidth: 1000,
 
             // User  
-            bubbleFromUserBackground: '#00B482',
+            bubbleFromUserBackground: '#711E82',
             bubbleFromUserTextColor: 'white',
-            bubbleFromUserBorderColor: '#00B482',
+            bubbleFromUserBorderColor: '#711E82',
             bubbleFromUserBorderRadius: 15,
             bubbleFromUserBorderStyle: 'solid',
             bubbleFromUserBorderWidth: 1,
