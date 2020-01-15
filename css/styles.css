@@ -69,6 +69,10 @@ purple: #711E82
     color: white;
     font-size: 150%;   
 }
+#headerText:hover,
+#headerText:focus{
+    cursor: default;
+}
 
 
 /* MS Teams Button*/
@@ -76,13 +80,14 @@ purple: #711E82
 #msteams {
     float: right;
     margin-right: 7px;
-    height: 50px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #msteams:hover,
 #msteams:focus {
     cursor: pointer;
-    background-color: #999999;
 }
 
 
