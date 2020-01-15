@@ -9,9 +9,9 @@ if (confirm("THIS AN ALPHA TEST BUILD! \nNO GUARANTEE THAT THE GIVEN ANSWERS ARE
 }
 
 help.onclick = function() {
-    if (window.confirm("Press OK to send a Email to a Compliance Officer. Press Cancel to cancel.")) {
+    if (window.confirm("Press OK to send a Email to report a bug. Press Cancel to cancel.")) {
         let mailAdress = "niclas.weh_ext@aesculap.de";
-        let subject = "ComplianceBot Human Support needed || Priority: HIGH/LOW";
+        let subject = "ComplianceBot Bug Report || Priority: HIGH/LOW";
         let body = "Please enter your question and change the priority in the subject to your needs..";
 
         window.location.href = "mailto:" + mailAdress + "?subject=" + subject + "&body=" + body;
