@@ -58,6 +58,7 @@ purple: #711E82
     margin-top: 10px;
     margin-bottom: 10px;
     height: 30px;
+    user-select: none;
 }
 
 #help:hover,
@@ -68,6 +69,7 @@ purple: #711E82
     display: inline-block;    
     color: white;
     font-size: 150%;   
+    user-select: none;
 }
 #headerText:hover,
 #headerText:focus{
@@ -83,6 +85,7 @@ purple: #711E82
     height: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
+    user-select: none;
 }
 
 #msteams:hover,
@@ -107,6 +110,7 @@ a {
     font-family: RotisSansSerif;
     font-size: 100%;
     color: #00B482 !important;
+    border-width: 0 !important;
 }
 
 .ac-pushButton:hover,
