@@ -13,10 +13,16 @@ body {
     height: 100%;
     width: 100%;
 }
+/*
+light-grey: #CCCCCC
+green: #00B482
+purple: #711E82
+
+*/
 
 #chatWindow {
     display: none;
-    background-color: #CCCCCC;
+    background-color: #00B482;
     position: fixed;
     left: 5%;
     top: 5%;
@@ -57,22 +63,6 @@ body {
     cursor: pointer;
 }
 
-
-/* font "ComplianceBot" */
-
-#header {
-    float: left;
-    margin-left: 10px;
-    margin-top: 6px;
-    font-weight: bold;
-}
-
-#header:hover,
-#header:focus {
-    cursor: default;
-}
-
-
 /* MS Teams Button*/
 
 #msteams {
@@ -98,11 +88,12 @@ a {
 }
 
 
-/* Maybe broken after update, not necessary */
+/* Maybe broken after update, necessary for BKC Design Guidlines*/
 
 .ac-pushButton {
     font-family: RotisSansSerif;
     font-size: 100%;
+    color: #00B482 !important;
 }
 
 .ac-pushButton:hover,
@@ -117,4 +108,5 @@ a {
 
 .ac-textBlock {
     white-space: normal !important;
+    text-align: center !important;
 }
