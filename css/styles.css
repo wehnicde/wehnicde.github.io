@@ -107,7 +107,7 @@ a {
 /* Maybe broken after update, necessary for BKC Design Guidlines*/
 
 .ac-pushButton {
-    font-family: RotisSansSerif;
+    font-family: RotisSansSerif, Arial;
     font-size: 100%;
     color: #00B482 !important;
     border-width: 0 !important;
