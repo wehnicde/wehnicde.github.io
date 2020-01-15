@@ -14,7 +14,7 @@ body {
     width: 100%;
 }
 /*
-light-grey: #CCCCCC
+light-grey: #f2f2f2
 green: #00B482
 purple: #711E82
 
@@ -22,7 +22,6 @@ purple: #711E82
 
 #chatWindow {
     display: none;
-    background-color: #00B482;
     position: fixed;
     left: 5%;
     top: 5%;
@@ -31,9 +30,8 @@ purple: #711E82
 }
 
 #webchat {
-    height: calc(100% - 39px);
+    height: calc(100% - 52px);
     width: calc(100%-2px);
-    padding: 2px;
 }
 
 #errorMessage {
@@ -44,7 +42,11 @@ purple: #711E82
 /* ####################### TOOLBAR ########################*/
 
 #chatwindowheader {
-    height: 35px;
+    height: 50px;
+    background-color: #00B482;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 50px;
 }
 
 
@@ -53,22 +55,28 @@ purple: #711E82
 #help {
     float: left;
     margin-left: 7px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
 }
 
 #help:hover,
 #help:focus {
     cursor: pointer;
 }
+#headerText{
+    display: inline-block;    
+    color: white;
+    font-size: 150%;   
+}
+
 
 /* MS Teams Button*/
 
 #msteams {
     float: right;
     margin-right: 7px;
-    height: 35px;
+    height: 50px;
 }
 
 #msteams:hover,
