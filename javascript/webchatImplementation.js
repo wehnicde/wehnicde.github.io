@@ -27,7 +27,7 @@ window.WebChat.renderWebChat({
             bubbleFromUserTextColor: 'black',
 
             backgroundColor: 'white',
-            primaryFont: 'RotisSansSerif',
+            primaryFont: 'RotisSansSerif, Arial',
 
             hideUploadButton: true,
 
@@ -37,3 +37,4 @@ window.WebChat.renderWebChat({
     },
     document.getElementById('webchat'));
 document.querySelector('#webchat > *').focus();
+
