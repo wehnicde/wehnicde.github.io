@@ -13,12 +13,6 @@ body {
     height: 100%;
     width: 100%;
 }
-/*
-light-grey: #f2f2f2
-green: #00B482
-purple: #711E82
-
-*/
 
 #chatWindow {
     display: none;
@@ -31,7 +25,7 @@ purple: #711E82
 
 #webchat {
     height: calc(100% - 52px);
-    width: calc(100%-2px);
+    width: 100%;
 }
 
 #errorMessage {
@@ -126,4 +120,16 @@ a {
 .ac-textBlock {
     white-space: normal !important;
     text-align: center !important;
+}
+
+
+@media screen and (max-width:800px){
+    #chatWindow {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        height: 100%;
+        width: 100%;
+    }
 }
