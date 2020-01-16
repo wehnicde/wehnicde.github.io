@@ -122,7 +122,6 @@ a {
     text-align: center !important;
 }
 
-
 @media screen and (max-width:800px){
     #chatWindow {
         display: none;
