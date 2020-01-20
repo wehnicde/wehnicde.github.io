@@ -1,40 +1,55 @@
-window.WebChat.renderWebChat({
-        directLine: window.WebChat.createDirectLine({
-            //	token: token
-            webSocket: true,
-            secret: 'n3bp21vbM6w.bcSCmX_kL1Dip04TgC8LXOlk7xN5Mhq3P3xKoYxLuwU',
-        }),
-        webSpeechPonyfillFactory: window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
-            region: 'westeurope',
-            subscriptionKey: '7fc4b1c310c84ada968e860e7879e316'
-        }),
+window
+    .fetch('https://compliancebotbbraun-bot-c.azurewebsites.net/api/token',
+        {
+            method: 'GET'
+        })
+    .then(function (res) {
+        return res.json();
+    })
+    .then(function (json) {
+        const token = json.token;
+        const tokenSpeech = json.tokenSpeech;
 
-        // disable timestamp
-        groupTimestamp: false,
+        window.WebChat.renderWebChat({
+            directLine: window.WebChat.createDirectLine({
+                token: token
+            }),
+            webSpeechPonyfillFactory: window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
+                authorizationToken: tokenSpeech,
+                region: 'westeurope'
+            }),
 
-        //set language
-        locale: 'en-US',
 
-        styleOptions: {
+            // disable timestamp
+            groupTimestamp: false,
 
-            // chatbot
-            bubbleBackground: '#f2f2f2',
-            bubbleTextColor: 'black',
-            bubbleMaxWidth: 600,
+            //set language
+            locale: 'en-US',
 
-            // User  
-            bubbleFromUserBackground: '#f2f2f2',
-            bubbleFromUserTextColor: 'black',
+            styleOptions: {
 
-            backgroundColor: 'white',
-            primaryFont: 'RotisSansSerif, Arial',
+                // chatbot
+                bubbleBackground: '#f2f2f2',
+                bubbleTextColor: 'black',
+                bubbleMaxWidth: 600,
 
-            hideUploadButton: true,
+                // User  
+                bubbleFromUserBackground: '#f2f2f2',
+                bubbleFromUserTextColor: 'black',
 
-            // Avatar ausblenden            
-            avatarSize: 0
-        }
-    },
-    document.getElementById('webchat'));
-document.querySelector('#webchat > *').focus();
+                backgroundColor: 'white',
+                primaryFont: 'RotisSansSerif, Arial',
+
+                hideUploadButton: true,
+
+                // Avatar ausblenden            
+                avatarSize: 0
+            }
+        },
+            document.getElementById('webchat'));
+        document.querySelector('#webchat > *').focus();
+    });
+
+
+
 
