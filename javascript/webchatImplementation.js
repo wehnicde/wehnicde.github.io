@@ -7,12 +7,12 @@ window
         return res.json();
     })
     .then(function (json) {
-        const token = json.token;
+        const tokenDirectLine = json.tokenDirectLine;
         const tokenSpeech = json.tokenSpeech;
 
         window.WebChat.renderWebChat({
             directLine: window.WebChat.createDirectLine({
-                token: token
+                token: tokenDirectLine
             }),
             webSpeechPonyfillFactory: window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
                 authorizationToken: tokenSpeech,
